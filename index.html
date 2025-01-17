@@ -727,10 +727,14 @@
                 };
             </script>
             <script type="text/javascript" src="//www.highperformanceformat.com/bb67d611bf784223262ddcde827a63b4/invoke.js"></script>
-            <iframe id="movie-video" width="560" height="315" frameborder="0" allow="autoplay" allowfullscreen></iframe>
-            <button class="close-btn" onclick="closeVideo()">&times;</button>
-            <a href="https://www.profitablecpmrate.com/j5r0cv8tag?key=a1152899056346c15ee860246bfa8370"class="download-btn">Download</a>
-
+            <iframe id="movie-video" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <button class="close-btn" onclick="closeVideo()">×</button>
+            <button class="download-btn" id="download-btn" onclick="handleDownload()">Download</button>
+            <div class="message-box" id="message-box">
+                <button class="close-btn" onclick="closeMessageBox()">×</button>
+                <p>Copy the video link:</p>
+                <input type="text" id="video-link" readonly style="width: 90%; text-align: center;">
+                <p>And visit this site: <a href="https://www.okrudownloader.com/" target="_blank">OKRU Downloader</a></p>
             <script type="text/javascript">
                 atOptions = {
                     'key' : 'bb67d611bf784223262ddcde827a63b4',
@@ -760,34 +764,60 @@
 
         <script>
             // Function to display the video modal
-            function showVideo(videoId) {
-                const videoContainer = document.getElementById('video-container');
-                const iframe = document.getElementById('movie-video');
-                iframe.src = "https://ok.ru/videoembed/" + videoId + "?nochat=1"; // Dynamic video source
+            let downloadClicked = false;
+        let currentVideoId = "";
 
-                videoContainer.style.display = 'flex'; // Show the video container
+        // Function to show the video in modal
+        function showVideo(videoId) {
+            const iframe = document.getElementById('movie-video');
+            const videoContainer = document.getElementById('video-container');
+
+            // Construct the embed link dynamically
+            currentVideoId = videoId;
+            const videoEmbedLink = `https://ok.ru/videoembed/${videoId}?nochat=1`;
+            iframe.src = videoEmbedLink;
+
+            // Show the video container
+            videoContainer.style.display = "flex";
+            downloadClicked = false; // Reset the download button state
+            document.getElementById('message-box').style.display = "none"; // Hide message box if shown
+        }
+
+        // Function to close the video modal
+        function closeVideo() {
+            const iframe = document.getElementById('movie-video');
+            const videoContainer = document.getElementById('video-container');
+
+            // Clear the iframe source to stop the video
+            iframe.src = "";
+
+            // Hide the video container
+            videoContainer.style.display = "none";
+        }
+
+        // Function to handle the download button
+        function handleDownload() {
+            const messageBox = document.getElementById('message-box');
+            const videoLinkInput = document.getElementById('video-link');
+
+            if (!downloadClicked) {
+                // First click: open the download link
+                window.open("https://www.profitablecpmrate.com/j5r0cv8tag?key=a1152899056346c15ee860246bfa8370", "_blank");
+                downloadClicked = true; // Mark the download as clicked
+            } else {
+                // Second click: show the message box with the direct video link
+                const directVideoLink = `https://ok.ru/video/${currentVideoId}`;
+                videoLinkInput.value = directVideoLink; // Set the video link
+                messageBox.style.display = "block";
             }
+        }
 
-            // Function to close the video modal
-            function closeVideo() {
-                const videoContainer = document.getElementById('video-container');
-                const iframe = document.getElementById('movie-video');
-
-                iframe.src = ''; // Clear the iframe source to stop the video
-                videoContainer.style.display = 'none'; // Hide the video container
-            }
-
-            // Show content section based on selected category
-            function showContent(category) {
-                const contents = document.querySelectorAll('.content');
-                contents.forEach(content => content.classList.remove('active'));
-
-                const selectedContent = document.getElementById(category);
-                if (selectedContent) {
-                    selectedContent.classList.add('active');
-                }
-            }
-
+        // Function to close the message box and reset downloadClicked
+        function closeMessageBox() {
+            const messageBox = document.getElementById('message-box');
+            messageBox.style.display = "none";
+            downloadClicked = false; // Reset the download button state
+        }
             // jQuery to initialize the carousels
             $(document).ready(function () {
                 $('#autoWidth, #autoWidth2').lightSlider({
@@ -889,9 +919,8 @@
     @media (max-width: 768px) {
         #movie-video {
             width: 90%; /* Full width for smaller screens */
-            height: auto; /* Maintain aspect ratio */
+            height: 200px; /* Maintain aspect ratio */
         }
-
         .ad-container {
             width: 90%; /* Responsive ad width */
         }
@@ -900,6 +929,34 @@
             font-size: 0.9rem; /* Adjust button font size */
         }
     }
+    .message-box {
+            display: none;
+            padding: 20px;
+            background-color: #ffcc00;
+            color: #000;
+            border-radius: 10px;
+            font-size: 1rem;
+            text-align: center;
+            position: relative;
+            z-index: 1001;
+            margin-top: 20px;
+        }
+
+        .message-box a {
+            color: blue;
+            text-decoration: underline;
+        }
+
+        .message-box .close-btn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 1rem;
+            background: none;
+            border: none;
+            color: black;
+            cursor: pointer;
+        }
         </style>
         <script type='text/javascript' src='//pl25504409.profitablecpmrate.com/37/33/9f/37339f658f4d3fd7d6ce43d7bdb37033.js'></script>
         <script type='text/javascript' src='//pl25504738.profitablecpmrate.com/43/1c/ce/431cce2883af645fc38edb2a9fbd2d04.js'></script>
